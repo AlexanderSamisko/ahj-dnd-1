@@ -132,6 +132,8 @@ export default class Engine {
           closest.after(dragged);
         } else if (closest.tagName === 'FOOTER') {
           parentOfTheClosest.insertBefore(dragged, parentOfTheClosest.lastChild);
+        } else if (closest.tagName === 'SECTION') {
+            closest.firstChild.after(dragged);
         }
       } else {
         return;
