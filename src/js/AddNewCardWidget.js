@@ -1,3 +1,5 @@
+import CardCreator from "./CardCreator";
+
 export default class AddNewCardWidget {
   static createNewCardWidget(className) {
     const targetColumn = document.querySelector(`.${className}`);

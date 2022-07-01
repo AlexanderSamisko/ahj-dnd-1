@@ -59,7 +59,7 @@ export default class Engine {
       ghosted = event.target.cloneNode(true);
 
       const shiftX = event.clientX - dragged.getBoundingClientRect().left
-       + board.getBoundingClientRect().top;
+       + board.getBoundingClientRect().left;
       const shiftY = event.clientY - dragged.getBoundingClientRect().top
        + board.getBoundingClientRect().top + 13.5;
 
