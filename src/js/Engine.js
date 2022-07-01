@@ -61,7 +61,7 @@ export default class Engine {
       const shiftX = event.clientX - dragged.getBoundingClientRect().left
        + board.getBoundingClientRect().left;
       const shiftY = event.clientY - dragged.getBoundingClientRect().top
-       + board.getBoundingClientRect().top + 13.5;
+       + board.getBoundingClientRect().top;
 
       ghosted.classList.add('dragged');
       ghosted.style.pointerEvents = 'none';

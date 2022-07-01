@@ -16,7 +16,6 @@ body {
     width: 98vw;
     height: 97vh;
     color: black;
-    position: relative; 
 }
 
 .content-board {
@@ -34,6 +33,7 @@ body {
     display: flex;
     height: fit-content;
     border-radius: 4px;
+    position: relative; 
 }
 
 .info-board {
