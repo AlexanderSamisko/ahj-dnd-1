@@ -44,6 +44,7 @@ export default class Engine {
   dragEvents() {
     let dragged = null;
     let ghosted = null;
+    let securePlace = null;
     const board = document.querySelector('.task-board');
     board.addEventListener('mousedown', (event) => {
       if (!event.target.classList.contains('card-window')) {
@@ -57,6 +58,8 @@ export default class Engine {
 
       dragged = event.target;
       ghosted = event.target.cloneNode(true);
+      securePlace = event.target.cloneNode(true);
+      securePlace.style.opacity = "0";
 
       const shiftX = event.clientX - dragged.getBoundingClientRect().left
        + board.getBoundingClientRect().left;
@@ -91,9 +94,19 @@ export default class Engine {
         ghosted.style.top = `${event.pageY - shiftY}px`;
         const closest = document.elementFromPoint(event.clientX, event.clientY);
         if (closest.classList.contains('moveable')) {
-          closest.style.backgroundColor = 'yellow';
-          closest.addEventListener('mouseleave', (event) => {
-            event.target.style.backgroundColor = 'white';
+          closest.closest('.column').insertBefore(securePlace, closest);
+          securePlace.addEventListener('mouseleave', (event) => {
+            event.target.remove();
+          });
+        } else if (closest.tagName === 'HEADER') {
+          closest.after(securePlace);
+          securePlace.addEventListener('mouseleave', (event) => {
+            event.target.remove();
+          });
+        } else if (closest.tagName === 'FOOTER') {
+          closest.closest('.column').insertBefore(securePlace, closest);
+          securePlace.addEventListener('mouseleave', (event) => {
+            event.target.remove();
           });
         }
       });
@@ -138,7 +151,9 @@ export default class Engine {
       } else {
         return;
       }
-
+      if(securePlace){
+        securePlace.remove();
+      }
       this.restorePointerEvents();
       dragged.classList.remove('invisible');
       document.body.removeChild(ghosted);
